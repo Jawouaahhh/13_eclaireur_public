@@ -37,11 +37,7 @@ class WorkflowManager:
         # Build communities scope, and add selected communities to df_to_save
         communities_selector = self.initialize_communities_scope(df_to_save_to_db)
 
-<<<<<<< HEAD
-        # Loop through the topics defined in the config
-=======
         # Loop through the topics defined in the config, e.g. marches publics or subventions.
->>>>>>> upstream/main
         for topic, topic_config in self.config["search"].items():
             # Process each topic to get files in scope and datafiles
             topic_files_in_scope, topic_datafiles = self.process_topic(
@@ -57,14 +53,9 @@ class WorkflowManager:
                 getattr(topic_datafiles, "datafiles_out", None),
                 getattr(topic_datafiles, "modifications_data", None),
             )
-<<<<<<< HEAD
-            # Add normalized data of the topic to df_to_save
-            df_to_save_to_db[topic + "_normalized"] = topic_datafiles.normalized_data
-=======
             # If config requires it, add normalized data of the topic to df_to_save
             if self.config["workflow"]["save_to_db"]:
                 df_to_save_to_db[topic + "_normalized"] = topic_datafiles.normalized_data
->>>>>>> upstream/main
 
         # Save data to the database if the config allows it
         if self.config["workflow"]["save_to_db"]:
@@ -96,16 +87,11 @@ class WorkflowManager:
         self.logger.info("Initializing communities scope.")
         # Initialize CommunitiesSelector with the config and select communities
         communities_selector = CommunitiesSelector(self.config["communities"])
-<<<<<<< HEAD
-        # Add selected communities data to df_to_save
-        df_to_save_to_db["communities"] = communities_selector.selected_data
-=======
 
         # Add selected communities data to df_to_save
         if self.config["workflow"]["save_to_db"]:
             df_to_save_to_db["communities"] = communities_selector.selected_data
 
->>>>>>> upstream/main
         self.logger.info("Communities scope initialized.")
         return communities_selector
 
